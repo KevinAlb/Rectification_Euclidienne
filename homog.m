@@ -1,4 +1,5 @@
 function [H] = homog(pg,pd) 
+test
 
 [val, pts] = size (pg);
 mat = zeros( 2*pts, 9);
