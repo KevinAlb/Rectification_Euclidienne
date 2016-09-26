@@ -1,5 +1,5 @@
 function [H] = homog(pg,pd) 
-test
+
 
 [val, pts] = size (pg);
 mat = zeros( 2*pts, 9);
@@ -23,10 +23,6 @@ mat(2:2:row,9) = -1 .* pd(2,:);
 
 transMat = mat.' ;
 
-mat
-transMat
-
-
 D =  transMat * mat;
 
 
@@ -38,6 +34,5 @@ H(1,:) = eigenVector(1:3,indice);
 H(2,:) = eigenVector(4:6,indice);
 H(3,:) = eigenVector(7:9,indice);
 
-H
 
 end
