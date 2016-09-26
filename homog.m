@@ -1,6 +1,5 @@
 function [H] = homog(pg,pd) 
 
-
 [val, pts] = size (pg);
 mat = zeros( 2*pts, 9);
 [row,column] = size(mat);
