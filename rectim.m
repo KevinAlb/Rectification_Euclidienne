@@ -1,13 +1,20 @@
 function I2=rectim(I1,uv,XY)
 
 Rot = homog(uv,XY);
+Rot
 
 [l,c]=size(I1);
 %Coordonnees des coins de l'image
 % (dans la suite, on travaille en colonne,ligne)
-Coins=[1,c,c,1 ; 1,1,l,l; 1 1 1 1];
+Coins=[1,c,c,1 ; 1,1,l,l; 1 1 1 1]
 % Calcul des images des coins de l'image
-ImCoins=Rot*Coins; ImCoins=ImCoins(1:2,:);
+
+%ImCoins=Rot*Coins; On modifie l'homographie de la rotation
+ImCoins = ones(3,4);
+ImCoins(1,:) = (Rot(1,:) * Coins) ./ (Rot(3,:) * Coins);
+ImCoins(2,:) = (Rot(2,:) * Coins) ./ (Rot(3,:) * Coins);
+
+ImCoins=ImCoins(1:2,:);
 %Calcul du rectangle englobant l'image transformee
 cmin=min(ImCoins(1,:));
 cmax=max(ImCoins(1,:));
@@ -36,7 +43,12 @@ I2=255*ones(l,c); %pour avoir un fond blanc
 [C,L]=meshgrid(1:c,1:l);
 P1=[C(:)';L(:)';ones(1,l*c)];
 %Calcul des antecedents
-P2=InvRot*P1; P2=P2(1:2,:);
+%P2=InvRot*P1;
+P2 = ones(3,l*c);
+P2(1,:) = (InvRot(1,:) * P1) ./ (InvRot(3,:) * P1);
+P2(2,:) = (InvRot(2,:) * P1) ./ (InvRot(3,:) * P1)
+
+P2=P2(1:2,:);
 %On ignore les antecedents qui ne sont pas dans l'image
 IndBons=find(P2(1,:)>0 & P2(1,:)<=c & P2(2,:)>0 & P2(2,:)<=l);
 %Calcul des niveaux de gris par interpolation bicubique
