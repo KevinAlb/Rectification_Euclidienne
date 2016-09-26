@@ -20,7 +20,7 @@ mat(2:2:row,9) = -1 .* pd(2,:);
 
 
 
-transMat = mat.' ;
+transMat = mat' ;
 
 D =  transMat * mat;
 
