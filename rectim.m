@@ -1,12 +1,12 @@
 function I2=rectim(I1,uv,XY)
 
 Rot = homog(uv,XY);
-Rot
+
 
 [l,c]=size(I1);
 %Coordonnees des coins de l'image
 % (dans la suite, on travaille en colonne,ligne)
-Coins=[1,c,c,1 ; 1,1,l,l; 1 1 1 1]
+Coins=[1,c,c,1 ; 1,1,l,l; 1 1 1 1];
 % Calcul des images des coins de l'image
 
 %ImCoins=Rot*Coins; On modifie l'homographie de la rotation
@@ -46,7 +46,7 @@ P1=[C(:)';L(:)';ones(1,l*c)];
 %P2=InvRot*P1;
 P2 = ones(3,l*c);
 P2(1,:) = (InvRot(1,:) * P1) ./ (InvRot(3,:) * P1);
-P2(2,:) = (InvRot(2,:) * P1) ./ (InvRot(3,:) * P1)
+P2(2,:) = (InvRot(2,:) * P1) ./ (InvRot(3,:) * P1);
 
 P2=P2(1:2,:);
 %On ignore les antecedents qui ne sont pas dans l'image
