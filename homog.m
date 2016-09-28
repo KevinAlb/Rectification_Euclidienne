@@ -46,7 +46,9 @@ H(1,:) = eigenVector(1:3,indice);
 H(2,:) = eigenVector(4:6,indice);
 H(3,:) = eigenVector(7:9,indice);
 
+Td
+Tg
 H
-H = Td' * H * Tg
+H = inv(Td) * H * Tg
 
 end
